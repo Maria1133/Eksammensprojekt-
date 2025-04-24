@@ -4,8 +4,8 @@
   import java.util.Date;
 
   PImage weather_icon;
-  String apiKey = "9cf275fd0d1dd5365b1004c036f92ade";  // Your API key
-  String city = "London";  // Default city
+  String apiKey = "9cf275fd0d1dd5365b1004c036f92ade";
+  String city = "London";  
   String userCity = city;
   float temperature;
   float wind_speed;
@@ -63,19 +63,19 @@ rect(350, 250, 100, 30);
 fill(0);
 text("Update", 370, 270);
 
-// Længere ned (rykket med mindst 60 pixels)
+
 fill(255);
-rect(350, 350, 150, 30);  // Flyttet 60 pixels længere ned
+rect(350, 350, 150, 30);  
 fill(0);
 text(searchDate, 360, 370);
 
 fill(255);
-rect(350, 390, 150, 30);  // Flyttet 60 pixels længere ned
+rect(350, 390, 150, 30);  
 fill(0);
 text(searchTime, 360, 410);
 
 fill(200);
-rect(350, 430, 100, 30);  // Flyttet 60 pixels længere ned
+rect(350, 430, 100, 30); 
 fill(0);
 text("Search", 375, 450);
 
@@ -156,8 +156,6 @@ void mousePressed() {
       temperature = current.getFloat("temperature");
       feelslike = current.getFloat("feelslike");
       wind_speed = current.getFloat("wind_speed");
-      //wind_dir = current.getString("wind_direction");
-      //weather_descriptions = current.getString("weather_description");
       uv_index = current.getFloat("uv_index");
       location = loc.getString("name") + ", " + loc.getString("country");
 
@@ -165,7 +163,7 @@ void mousePressed() {
         String weather_icon_url = "";
         if (iconArray != null && iconArray.size() > 0) {
             weather_icon_url = iconArray.getString(0);
-            downloadWeatherIcon(weather_icon_url); // Download og indlæs ikonet
+            downloadWeatherIcon(weather_icon_url); 
         }
 
       JSONArray weatherArray = current.getJSONArray("weather_descriptions");
@@ -175,7 +173,7 @@ void mousePressed() {
             weather_descriptions = "No description available";
         }
 
-        // Hent wind_dir korrekt
+ 
         if (current.hasKey("wind_dir")) {
             wind_dir = current.getString("wind_dir");
         } else {
@@ -288,7 +286,6 @@ void mousePressed() {
     return -1;
   }
 
-  // FIX: Added missing functions
   String getTodayDate() {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     return sdf.format(new Date());
@@ -301,10 +298,10 @@ void mousePressed() {
 
 void downloadWeatherIcon(String imageUrl) {
     try {
-        byte[] imageBytes = loadBytes(imageUrl); // Hent billedet som byte-array
+        byte[] imageBytes = loadBytes(imageUrl); 
         if (imageBytes != null) {
-            saveBytes("weather_icon.png", imageBytes); // Gem billedet lokalt
-            weather_icon = loadImage("weather_icon.png"); // Indlæs billedet
+            saveBytes("weather_icon.png", imageBytes); 
+            weather_icon = loadImage("weather_icon.png"); 
         }
     } catch (Exception e) {
         println("Failed to download weather icon: " + e.getMessage());
